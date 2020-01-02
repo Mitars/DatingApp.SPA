@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
+import { BsDropdownModule } from 'ngx-bootstrap';
+
 @NgModule({
    declarations: [
       AppComponent,
@@ -19,6 +21,7 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
    ],
    imports: [
       BrowserModule,
+      BsDropdownModule.forRoot(),
       HttpClientModule,
       FormsModule
    ],
