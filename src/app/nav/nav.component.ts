@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { AltertifyService } from '../_services/altertify.service';
+import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class NavComponent implements OnInit {
   constructor(
     private router: Router,
     public authService: AuthService,
-    private alertify: AltertifyService
+    private alertify: AlertifyService
   ) {}
 
   ngOnInit() {}

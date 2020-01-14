@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import * as alertif from 'alertifyjs';
+import * as alertify from 'alertifyjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AltertifyService {
+export class AlertifyService {
   constructor() {}
 
   confirm(message: string, okCallback: () => any) {
-    alertif.confirm(message, (e: any) => {
+    alertify.confirm(message, (e: any) => {
       if (e) {
         okCallback();
       }
@@ -16,18 +16,18 @@ export class AltertifyService {
   }
 
   success(message: string) {
-    alertif.success(message);
+    alertify.success(message);
   }
 
   error(message: string) {
-    alertif.error(message);
+    alertify.error(message);
   }
 
   warning(message: string) {
-    alertif.warning(message);
+    alertify.warning(message);
   }
 
   message(message: string) {
-    alertif.message(message);
+    alertify.message(message);
   }
 }
