@@ -16,7 +16,7 @@
 
     <div dropdown *ngIf="isLoggedIn()" class="dropdown">
       <span class="mr-1">
-      <img src="{{photoUrl}}" />
+      <img src="{{photoUrl  || '../../assets/user.png'}}" />
       </span>
       <a class="dropdown-toggle text-light" dropdownToggle>
         Welcome {{ this.authService.decodedToken?.unique_name | titlecase }}

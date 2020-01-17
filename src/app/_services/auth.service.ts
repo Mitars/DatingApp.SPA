@@ -25,7 +25,9 @@ export class AuthService {
     const user: User = JSON.parse(localStorage.getItem('user'));
     this.currentUser = user;
 
-    this.changeMemberPhoto(user.photoUrl);
+    if (user != null) {
+      this.changeMemberPhoto(user.photoUrl);
+    }
   }
 
   changeMemberPhoto(photoUrl: string) {
@@ -51,8 +53,8 @@ export class AuthService {
     );
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
+  register(user: User) {
+    return this.http.post(this.baseUrl + 'register', user);
   }
 
   isLoggedIn() {
