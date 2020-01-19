@@ -16,7 +16,8 @@ export class UserService {
 
   getUsers(
     page?: number,
-    itemsPerPage?: number
+    itemsPerPage?: number,
+    userParams?
   ): Observable<PaginatedResult<User[]>> {
     const paginatedResult = new PaginatedResult<User[]>();
 
@@ -28,6 +29,12 @@ export class UserService {
 
     if (itemsPerPage != null) {
       params = params.append('pageSize', itemsPerPage.toString());
+    }
+
+    if (userParams != null) {
+      params = params.append('minAge', userParams.minAge);
+      params = params.append('maxAge', userParams.maxAge);
+      params = params.append('gender', userParams.gender);
     }
 
     return this.http
