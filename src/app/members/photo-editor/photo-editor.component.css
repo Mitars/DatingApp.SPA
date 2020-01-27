@@ -12,3 +12,20 @@ img.img-thumbnail {
 input[type=file] {
     color: transparent;
 }
+
+.img-wrapper {
+    position: relative;
+}
+
+.img-awaiting-approval {
+    opacity: 0.5
+}
+
+.img-text {
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    bottom: 8px;
+    margin-right: auto;
+    margin-left: auto;
+}

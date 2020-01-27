@@ -13,7 +13,8 @@ import {
   TabsModule,
   BsDatepickerModule,
   PaginationModule,
-  ButtonsModule
+  ButtonsModule,
+  ModalModule
 } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -24,6 +25,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
@@ -43,6 +45,12 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
 import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { AdminService } from './_services/admin.service';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -60,6 +68,10 @@ export class CustomHammerConfig extends HammerGestureConfig {
     AppComponent,
     NavComponent,
     HomeComponent,
+    AdminPanelComponent,
+    UserManagementComponent,
+    PhotoManagementComponent,
+    RolesModalComponent,
     RegisterComponent,
     MemberCardComponent,
     MemberListComponent,
@@ -69,6 +81,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     PhotoEditorComponent,
     ListsComponent,
     MessagesComponent,
+    HasRoleDirective,
     TimeAgoPipe
   ],
   imports: [
@@ -82,6 +95,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     PaginationModule.forRoot(),
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
+    ModalModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {
@@ -96,6 +110,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
   providers: [
     AuthService,
     AuthGuard,
+    AdminService,
     PreventUnsavedChanges,
     UserService,
     ErrorInterceptorProvider,
@@ -105,6 +120,9 @@ export class CustomHammerConfig extends HammerGestureConfig {
     ListsResolver,
     MessagesResolver,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
+  ],
+  entryComponents: [
+    RolesModalComponent
   ],
   bootstrap: [AppComponent]
 })
