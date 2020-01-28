@@ -7,6 +7,9 @@ import {
   NgxGalleryAnimation
 } from 'ngx-gallery';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { AuthService } from 'src/app/_services/auth.service';
+import { UserService } from 'src/app/_services/user.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -14,24 +17,27 @@ import { TabsetComponent } from 'ngx-bootstrap';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
-  @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
+  @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
   user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private authService: AuthService,
+    private alertify: AlertifyService
+  ) {}
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
 
-    this.route.queryParams.subscribe(
-      params => {
-        const selectedTab = params.tab;
-        this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
-      }
-    );
+    this.route.queryParams.subscribe(params => {
+      const selectedTab = params.tab;
+      this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
+    });
 
     this.galleryOptions = [
       {
@@ -58,6 +64,19 @@ export class MemberDetailComponent implements OnInit {
       });
     }
     return imageUrls;
+  }
+
+  likeUser() {
+    this.userService
+      .sendLike(this.authService.decodedToken.nameid, this.user.id)
+      .subscribe(
+        data => {
+          this.alertify.success('You have liked: ' + this.user.knownAs);
+        },
+        error => {
+          this.alertify.error(error);
+        }
+      );
   }
 
   selectTab(tabId: number) {
