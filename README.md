@@ -1,14 +1,21 @@
-# DatingAppSPA
+# DatingApp.SPA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+Dating App SPA is the single page application frontend for the Dating Application course project.
 
-## Development server
+Demonstrates the capabilities of Angular when tied together with a .NET Core API.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
 
-## Code scaffolding
+In order to run the Dating App, you need both 
+[Dating App SPA](https://github.com/Mitars/DatingApp.SPA) and the [Dating App API](https://github.com/Mitars/DatingApp.API).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Production
+
+In order to prepare the application for production, you need to download both the `DatingApp.API` and `DatingApp.SPA` and place them in the same directory.
+
+In the `DatingApp.SPA` run
+`ng build --prod`
+and it will output the production files to sibling directory `DatingApp.API/wwwroot` which can be hosted.
 
 ## Build
 
@@ -21,7 +28,3 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
