@@ -93,6 +93,13 @@ export class UserService {
     );
   }
 
+  removeLike(id: number, recipientId: number) {
+    return this.http.delete(
+      this.baseUrl + 'users/' + id + '/like/' + recipientId,
+      {}
+    );
+  }
+
   getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
     const paginatedResult = new PaginatedResult<Message[]>();
 

@@ -16,4 +16,5 @@ export interface User {
   interests?: string;
   photos?: Photo[];
   roles?: string[];
+  isLiked?: boolean;
 }

@@ -24,6 +24,17 @@ export class MemberCardComponent implements OnInit {
     this.userService.sendLike(this.authService.decodedToken.nameid, id)
     .subscribe(data => {
       this.alertify.success('You have liked: ' + this.user.knownAs);
+      this.user.isLiked = true;
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
+  removeLike(id: number) {
+    this.userService.removeLike(this.authService.decodedToken.nameid, id)
+    .subscribe(data => {
+      this.alertify.success('You have unliked: ' + this.user.knownAs);
+      this.user.isLiked = false;
     }, error => {
       this.alertify.error(error);
     });
