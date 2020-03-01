@@ -50,6 +50,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { AdminService } from './_services/admin.service';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { LearnMoreComponent } from './learn-more/learn-more.component';
 
 
 export function tokenGetter() {
@@ -73,6 +74,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     PhotoManagementComponent,
     RolesModalComponent,
     RegisterComponent,
+    LearnMoreComponent,
     MemberCardComponent,
     MemberListComponent,
     MemberDetailComponent,

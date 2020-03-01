@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
+  learnMoreMode = false;
 
   constructor() { }
 
@@ -16,7 +17,15 @@ export class HomeComponent implements OnInit {
     this.registerMode = true;
   }
 
+  learnMore() {
+    this.learnMoreMode = true;
+  }
+
   cancelRegisterMode() {
     this.registerMode = false;
+  }
+
+  cancelLearnMoreMode() {
+    this.learnMoreMode = false;
   }
 }
