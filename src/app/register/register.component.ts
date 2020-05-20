@@ -2,14 +2,14 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.bsConfig = {
-      containerClass: 'theme-red'
+      containerClass: 'theme-red',
     };
     this.createRegisterForm();
   }
@@ -45,10 +45,10 @@ export class RegisterComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(4),
-            Validators.maxLength(8)
-          ]
+            Validators.maxLength(8),
+          ],
         ],
-        confirmPassword: ['', Validators.required]
+        confirmPassword: ['', Validators.required],
       },
       { validator: this.passwordMatchValidator }
     );
@@ -64,10 +64,10 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.user = Object.assign({}, this.registerForm.value);
       this.authService.register(this.user).subscribe(
-        next => {
+        (next) => {
           this.alertify.success('registration successful');
         },
-        error => {
+        (error) => {
           this.alertify.error(error);
         },
         () => {

@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import {
   NgxGalleryOptions,
   NgxGalleryImage,
-  NgxGalleryAnimation
-} from 'ngx-gallery';
-import { TabsetComponent } from 'ngx-bootstrap';
+  NgxGalleryAnimation,
+} from '@kolkov/ngx-gallery';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { AuthService } from 'src/app/_services/auth.service';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
@@ -14,7 +14,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
-  styleUrls: ['./member-detail.component.css']
+  styleUrls: ['./member-detail.component.css'],
 })
 export class MemberDetailComponent implements OnInit {
   @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
@@ -30,11 +30,11 @@ export class MemberDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.user = data.user;
     });
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       const selectedTab = params.tab;
       this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
     });
@@ -46,8 +46,8 @@ export class MemberDetailComponent implements OnInit {
         imagePercent: 100,
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide,
-        preview: false
-      }
+        preview: false,
+      },
     ];
 
     this.galleryImages = this.getImages();
@@ -60,7 +60,7 @@ export class MemberDetailComponent implements OnInit {
         small: photo.url,
         medium: photo.url,
         big: photo.url,
-        description: photo.description
+        description: photo.description,
       });
     }
     return imageUrls;
@@ -70,10 +70,10 @@ export class MemberDetailComponent implements OnInit {
     this.userService
       .sendLike(this.authService.decodedToken.nameid, this.user.id)
       .subscribe(
-        data => {
+        (data) => {
           this.alertify.success('You have liked: ' + this.user.knownAs);
         },
-        error => {
+        (error) => {
           this.alertify.error(error);
         }
       );
