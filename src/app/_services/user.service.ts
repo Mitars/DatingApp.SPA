@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { Message } from '../_models/message';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   baseUrl = environment.apiUrl;
@@ -16,6 +16,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUsers(
+    id: number,
     page?: number,
     itemsPerPage?: number,
     userParams?,
@@ -24,6 +25,8 @@ export class UserService {
     const paginatedResult = new PaginatedResult<User[]>();
 
     let params = new HttpParams();
+
+    params = params.append('userId', id.toString());
 
     if (page != null) {
       params = params.append('pageNumber', page.toString());
@@ -51,10 +54,10 @@ export class UserService {
     return this.http
       .get<User[]>(this.baseUrl + 'users', {
         observe: 'response',
-        params
+        params,
       })
       .pipe(
-        map(response => {
+        map((response) => {
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
             paginatedResult.pagination = JSON.parse(
@@ -120,10 +123,10 @@ export class UserService {
     return this.http
       .get<Message[]>(this.baseUrl + 'users/' + id + '/messages', {
         observe: 'response',
-        params
+        params,
       })
       .pipe(
-        map(response => {
+        map((response) => {
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
             paginatedResult.pagination = JSON.parse(
@@ -137,7 +140,9 @@ export class UserService {
   }
 
   getMessageThread(id: number, recipientId: number) {
-    return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
+    return this.http.get<Message[]>(
+      this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId
+    );
   }
 
   sendMessage(id: number, message: Message) {
@@ -145,11 +150,15 @@ export class UserService {
   }
 
   deleteMessage(id: number, userId: number) {
-    return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + id, {});
+    return this.http.post(
+      this.baseUrl + 'users/' + userId + '/messages/' + id,
+      {}
+    );
   }
 
   markAsRead(id: number, userId: number) {
-    return this.http.post(this.baseUrl + 'users/' + userId + '/messages/' + id + '/read', {})
+    return this.http
+      .post(this.baseUrl + 'users/' + userId + '/messages/' + id + '/read', {})
       .subscribe();
   }
 }

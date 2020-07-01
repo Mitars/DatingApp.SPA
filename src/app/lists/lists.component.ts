@@ -9,7 +9,7 @@ import { AlertifyService } from '../_services/alertify.service';
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',
-  styleUrls: ['./lists.component.css']
+  styleUrls: ['./lists.component.css'],
 })
 export class ListsComponent implements OnInit {
   users: User[];
@@ -17,13 +17,14 @@ export class ListsComponent implements OnInit {
   likesParam: string;
 
   constructor(
+    private authService: AuthService,
     private userService: UserService,
     private route: ActivatedRoute,
     private alertify: AlertifyService
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.users = data.users.results;
       this.pagination = data.users.pagination;
     });
@@ -34,6 +35,7 @@ export class ListsComponent implements OnInit {
   loadUsers() {
     this.userService
       .getUsers(
+        this.authService.decodedToken.nameid,
         this.pagination.currentPage,
         this.pagination.itemsPerPage,
         null,
@@ -45,7 +47,7 @@ export class ListsComponent implements OnInit {
           this.users = res.result;
           this.pagination = res.pagination;
         },
-        error => {
+        (error) => {
           this.alertify.error(error);
         }
       );
